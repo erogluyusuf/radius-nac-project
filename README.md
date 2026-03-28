@@ -39,7 +39,7 @@ docker-compose up -d --build
 ```
 *(Bu komut PostgreSQL, Redis, FastAPI ve FreeRADIUS servislerini ayağa kaldıracaktır.)*
 
-## 🧪 Sistemi Test Etme
+##  Sistemi Test Etme
 
 Sistemin çalıştığını doğrulamak için FreeRADIUS konteyneri içerisinden test araçlarını (`radtest` ve `radclient`) kullanabilirsiniz.
 
