@@ -9,7 +9,7 @@
 Bu proje, RADIUS protokolünü kullanarak temel düzeyde çalışan bir **Network Access Control (NAC)** sistemidir.Kimlik doğrulama (Authentication), yetkilendirme (Authorization) ve hesap yönetimi (Accounting) — yani **AAA mimarisi** — üzerine inşa edilmiştir.
 
 ##  Proje Mimarisi
-
+ 
 Sistem, mikroservis yaklaşımıyla Docker üzerinde koşturulmaktadır ve tüm bileşenler izole bir Docker ağı üzerinden haberleşir:
 
 - **FreeRADIUS 3.2:** Sistemin kalbi. Kimlik doğrulama ve hesap yönetimi taleplerini karşılar, `rlm_rest` modülü ile FastAPI'ye yönlendirir.
