@@ -22,21 +22,21 @@ Sistem, mikroservis yaklaşımıyla Docker üzerinde koşturulmaktadır ve tüm 
 Sistemi ayağa kaldırmak için bilgisayarınızda **Docker** ve **Docker Compose** yüklü olmalıdır.
 
 **1. Repoyu Klonlayın:**
-\`\`\`bash
+```bash
 git clone https://github.com/erogluyusuf/radius-nac-project.git
 cd radius-nac-project
-\`\`\`
+```
 
 **2. Çevresel Değişkenleri (Environment Variables) Ayarlayın:**
 Proje kök dizinindeki örnek env dosyasını kopyalayarak kendi şifrelerinizi belirleyin.
-\`\`\`bash
+```bash
 cp .env.example .env
-\`\`\`
+```
 
 **3. Konteynerleri Başlatın:**
-\`\`\`bash
+```bash
 docker-compose up -d --build
-\`\`\`
+```
 *(Bu komut PostgreSQL, Redis, FastAPI ve FreeRADIUS servislerini ayağa kaldıracaktır.)*
 
 ## 🧪 Sistemi Test Etme
@@ -44,15 +44,15 @@ docker-compose up -d --build
 Sistemin çalıştığını doğrulamak için FreeRADIUS konteyneri içerisinden test araçlarını (`radtest` ve `radclient`) kullanabilirsiniz.
 
 **1. PAP/CHAP (Kullanıcı Adı/Şifre) Testi:**
-\`\`\`bash
+```bash
 docker exec -it freeradius radtest kullaniciadi sifre localhost 0 testing123
-\`\`\`
+```
 
 **2. MAB (MAC Authentication Bypass) Testi:**
 (802.1X desteklemeyen yazıcı/telefon gibi cihazlar için)
-\`\`\`bash
+```bash
 echo "User-Name=AA:BB:CC:DD:EE:FF, Calling-Station-Id=AA-BB-CC-DD-EE-FF" | docker exec -i freeradius radclient -x localhost auth testing123
-\`\`\`
+```
 
 ##  API Endpoint'leri (FastAPI)
 
