@@ -1,6 +1,5 @@
 name: Convert README to PDF
 
-# Sadece main dalındaki README.md dosyası değiştiğinde tetiklenir
 on:
   push:
     branches:
@@ -13,22 +12,26 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write # Geri commit atabilmek için gerekli yazma izni
+      contents: write 
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Loglardaki uyarıyı gidermek için Node sürümünü 24'e güncelledik
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install md-to-pdf
         run: npm install -g md-to-pdf
 
+      # Chrome çökmesini engellemek için .mdtopdfrc yapılandırma dosyası oluşturup Sandbox'ı kapatıyoruz
       - name: Generate PDF
-        run: md-to-pdf README.md
+        run: |
+          echo '{"launch_options": {"args": ["--no-sandbox", "--disable-setuid-sandbox"]}}' > .mdtopdfrc
+          md-to-pdf README.md
 
       - name: Commit and Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
