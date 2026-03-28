@@ -1,0 +1,24 @@
+rest {
+    connect_uri = "http://api:8000"
+
+    authenticate {
+        uri = "${..connect_uri}/auth"
+        method = 'post'
+        body = 'json'
+        data = '{"username": "%{User-Name}", "password": "%{User-Password}", "calling_station_id": "%{Calling-Station-Id}"}'
+    }
+
+    authorize {
+        uri = "${..connect_uri}/authorize"
+        method = 'post'
+        body = 'json'
+        data = '{"username": "%{User-Name}", "calling_station_id": "%{Calling-Station-Id}"}'
+    }
+
+    accounting {
+        uri = "${..connect_uri}/accounting"
+        method = 'post'
+        body = 'json'
+        data = '{"acct_status_type": "%{Acct-Status-Type}", "acct_session_id": "%{Acct-Session-Id}", "username": "%{User-Name}", "nas_ip_address": "%{NAS-IP-Address}", "acct_session_time": %{%{Acct-Session-Time}:-0}, "acct_input_octets": %{%{Acct-Input-Octets}:-0}, "acct_output_octets": %{%{Acct-Output-Octets}:-0}, "calling_station_id": "%{Calling-Station-Id}", "called_station_id": "%{Called-Station-Id}", "acct_terminate_cause": "%{Acct-Terminate-Cause}"}'
+    }
+}

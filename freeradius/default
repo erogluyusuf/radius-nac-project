@@ -1,0 +1,39 @@
+server default {
+    listen {
+        type = auth
+        ipaddr = *
+        port = 0
+        limit {
+            max_connections = 16
+            lifetime = 0
+            idle_timeout = 30
+        }
+    }
+    listen {
+        ipaddr = *
+        port = 0
+        type = acct
+        limit {
+            max_connections = 16
+            lifetime = 0
+            idle_timeout = 30
+        }
+    }
+    authorize {
+        preprocess
+        if (!User-Password && Calling-Station-Id) {
+            update request {
+                User-Password := "%{Calling-Station-Id}"
+            }
+        }
+        rest
+    }
+    authenticate {
+        Auth-Type rest {
+            rest
+        }
+    }
+    accounting {
+        rest
+    }
+}
