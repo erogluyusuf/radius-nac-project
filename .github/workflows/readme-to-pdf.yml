@@ -9,7 +9,8 @@ on:
 
 jobs:
   build-pdf:
-    runs-on: ubuntu-latest
+    # Sorunu çözen sihirli satır: ubuntu-latest yerine ubuntu-22.04 kullanıyoruz
+    runs-on: ubuntu-22.04 
 
     permissions:
       contents: write 
@@ -18,7 +19,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Loglardaki uyarıyı gidermek için Node sürümünü 24'e güncelledik
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -27,7 +27,6 @@ jobs:
       - name: Install md-to-pdf
         run: npm install -g md-to-pdf
 
-      # Chrome çökmesini engellemek için .mdtopdfrc yapılandırma dosyası oluşturup Sandbox'ı kapatıyoruz
       - name: Generate PDF
         run: |
           echo '{"launch_options": {"args": ["--no-sandbox", "--disable-setuid-sandbox"]}}' > .mdtopdfrc
