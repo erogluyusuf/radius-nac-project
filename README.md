@@ -1,4 +1,4 @@
-# 🛡️ Network Access Control (NAC) Sistemi
+#  Network Access Control (NAC) Sistemi
 
 ![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?logo=fastapi)
@@ -8,7 +8,7 @@
 
 Bu proje, RADIUS protokolünü kullanarak temel düzeyde çalışan bir **Network Access Control (NAC)** sistemidir. Staj değerlendirme ödevi kapsamında; kimlik doğrulama (Authentication), yetkilendirme (Authorization) ve hesap yönetimi (Accounting) — yani **AAA mimarisi** — üzerine inşa edilmiştir.
 
-## 🏗️ Proje Mimarisi
+##  Proje Mimarisi
 
 Sistem, mikroservis yaklaşımıyla Docker üzerinde koşturulmaktadır ve tüm bileşenler izole bir Docker ağı üzerinden haberleşir:
 
@@ -17,7 +17,7 @@ Sistem, mikroservis yaklaşımıyla Docker üzerinde koşturulmaktadır ve tüm 
 - **PostgreSQL 18:** Kullanıcı kimlik bilgileri, MAC adresleri ve geçmiş oturum (radacct) kayıtlarının kalıcı olarak tutulduğu ilişkisel veritabanı.
 - **Redis 8:** Aktif oturumların hızlı takibi ve başarısız giriş denemelerine karşı **rate-limiting** uygulanması için kullanılan bellek içi veri yapısı.
 
-## 🚀 Kurulum ve Çalıştırma
+##  Kurulum ve Çalıştırma
 
 Sistemi ayağa kaldırmak için bilgisayarınızda **Docker** ve **Docker Compose** yüklü olmalıdır.
 
@@ -54,7 +54,7 @@ docker exec -it freeradius radtest kullaniciadi sifre localhost 0 testing123
 echo "User-Name=AA:BB:CC:DD:EE:FF, Calling-Station-Id=AA-BB-CC-DD-EE-FF" | docker exec -i freeradius radclient -x localhost auth testing123
 \`\`\`
 
-## 📡 API Endpoint'leri (FastAPI)
+##  API Endpoint'leri (FastAPI)
 
 Policy Engine, `http://localhost:8000` adresi üzerinden `rlm_rest` modülü ile haberleşir:
 
@@ -65,7 +65,7 @@ Policy Engine, `http://localhost:8000` adresi üzerinden `rlm_rest` modülü ile
 | **POST** | `/accounting` | RADIUS oturum verilerini kaydetme (Accounting) |
 | **GET** | `/sessions/active`| Redis üzerindeki aktif oturumları listeleme |
 
-## 🛡️ Güvenlik Önlemleri
+##  Güvenlik Önlemleri
 - Başarısız kimlik doğrulama denemeleri **Redis üzerinden rate-limiting** ile sınırlandırılmıştır.
 - Hassas veriler (veritabanı şifreleri, RADIUS secret) `.env` dosyası ile izole edilmiştir.
 - Kullanıcı şifreleri veritabanında düz metin (plaintext) olarak değil, güvenli hash algoritmalarıyla saklanmaktadır.
