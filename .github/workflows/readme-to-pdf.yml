@@ -1,0 +1,37 @@
+name: Convert README to PDF
+
+# Sadece main dalındaki README.md dosyası değiştiğinde tetiklenir
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'README.md'
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # Geri commit atabilmek için gerekli yazma izni
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install md-to-pdf
+        run: npm install -g md-to-pdf
+
+      - name: Generate PDF
+        run: md-to-pdf README.md
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs: update README.pdf"
+          file_pattern: 'README.pdf'
