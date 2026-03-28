@@ -6,7 +6,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-336791?logo=postgresql)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker)
 
-Bu proje, RADIUS protokolünü kullanarak temel düzeyde çalışan bir **Network Access Control (NAC)** sistemidir. Staj değerlendirme ödevi kapsamında; kimlik doğrulama (Authentication), yetkilendirme (Authorization) ve hesap yönetimi (Accounting) — yani **AAA mimarisi** — üzerine inşa edilmiştir.
+Bu proje, RADIUS protokolünü kullanarak temel düzeyde çalışan bir **Network Access Control (NAC)** sistemidir.Kimlik doğrulama (Authentication), yetkilendirme (Authorization) ve hesap yönetimi (Accounting) — yani **AAA mimarisi** — üzerine inşa edilmiştir.
 
 ##  Proje Mimarisi
 
